@@ -2,6 +2,7 @@
 #include<stdio.h>
 #include<ctype.h>
 #include<string.h>
+#include<stdio_ext.h>
 
 /*Created individual functions for name and phone number and email*/
 void name_validation(Addressbook [],int);
@@ -50,6 +51,7 @@ void phone_no_validation(Addressbook contact_details[],int index)
     printf("Enter Phone Number : ");
     mobile_input:
     scanf("%10s",contact_details -> Contacts[index].phone_no);
+    __fpurge(stdin);
 
     int phone=1,j=0;//valid  
     while(contact_details->Contacts[index].phone_no[j] !='\0')
