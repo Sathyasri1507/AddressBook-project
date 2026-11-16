@@ -37,7 +37,7 @@ The program uses `__fpurge()` from `stdio_ext.h`, so it is designed to build on 
 **Step 1: Compile the program**
 
 ```bash
-gcc main.c functions.c dummycontacts.c -o addressbook
+gcc *.c -o addressbook
 ```
 
 **Step 2: Initialize the CSV file before the first run**
@@ -118,8 +118,6 @@ Bob Johnson,8123456789,bob@company.com
 - Handle missing CSV files automatically.
 - Implement case-insensitive search.
 - Support additional email domains such as `.in` and `.org`.
-- Improve input buffer handling.
-- Add automatic saving after every modification.
 
 ---
 
