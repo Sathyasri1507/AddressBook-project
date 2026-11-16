@@ -1,73 +1,126 @@
-# AddressBook-project
-AddressBook management system using C
+# Address Book Management System using C
 
-A menu-driven command-line address book written in C. It lets you create, list, search, edit and delete
-contacts, and saves them to a CSV file so they persist between runs.
-Author: M. Sathyasri
-Batch: 26022A
-Features
-• Create a contact with validated name, phone number and email
-• List all contacts in a formatted table
-• Search by name (partial match), phone number or email
-• Edit the name, phone number or email of any contact chosen by serial number
-• Delete a contact chosen by serial number
-• Choosing 6. Exiting saves all contacts to Contacts.csv
-• Contacts are loaded automatically from Contacts.csv at start-up
-• Duplicate phone numbers and emails are rejected on create and edit
-Project Structure
-File
-Purpose
-main.c
-addressbook.h
-Program entry point and the main menu loop
-contact and Addressbook structures and all function declarations
-functions.c
-Core logic: validation, create, list, search, edit, delete, save
-dummycontacts.c
-load_contact(): reads Contacts.csv at start-up (dummy-contact loader is
-commented out)
-Contacts.csv
-Build and Run
-Saved contact data (created/overwritten on Exiting)
-Requires a C compiler such as gcc. The program uses __fpurge() from stdio_ext.h, so it builds on
-Linux (glibc) but not on Windows/MSVC without changes.
+A menu-driven command-line Address Book application developed using **C programming**. It allows users to create, list, search, edit and delete contacts. Contact details are stored in a CSV file to maintain data between program executions.
+
+**Author:** M. Sathyasri  
+**Batch:** 26022A
+
+## Features
+
+- Create a contact with validated name, phone number and email.
+- List all contacts in a formatted table.
+- Search contacts by name , phone number or email.
+- Edit the name, phone number or email of an existing contact using its serial number.
+- Delete a contact using its serial number.
+- Automatically load contacts from `Contacts.csv` at startup.
+- Save all contacts to `Contacts.csv` when choosing option 6 (Exit).
+- Prevent duplicate phone numbers and email addresses during contact creation and editing.
+
+## Project Structure
+
+| File | Description |
+|---|---|
+| `main.c` | Program entry point and main menu loop |
+| `addressbook.h` | Contact and AddressBook structures and function declarations |
+| `functions.c` | Core logic: validation, create, list, search, edit, delete and save operations |
+| `dummycontacts.c` | Contains `load_contact()` to load contacts from `Contacts.csv` at startup |
+| `Contacts.csv` | Stores contact details and contact count |
+
+## Build and Run
+
+**Requirements:**
+- GCC compiler
+- Linux environment (glibc)
+
+The program uses `__fpurge()` from `stdio_ext.h`, so it is designed to build on Linux with glibc. It will not compile on Windows/MSVC without modifications.
+
+**Step 1: Compile the program**
+
+```bash
 gcc main.c functions.c dummycontacts.c -o addressbook
-./addressbook
-Run the program from the folder that contains Contacts.csv, since the file is read and written using a
-relative path.
-First run: if Contacts.csv does not exist, the program prints File opening is failed and will then crash. Before
-the first run, create the file with a single line containing 0:
-echo 0 > Contacts.csv
-Usage
-The menu offers: 1 Create, 2 List, 3 Search, 4 Edit, 5 Delete, 6 Exiting. Search by name, phone number or
-email. Edit and Delete first list all contacts; enter the S.No of the contact to act on.
-Important: Changes are only written to disk when you choose 6. Exiting. Closing the program any other way
-will lose unsaved changes.
-Address Book (C) - README | Page 1
-Input Validation Rules
-Field
-Rules
-Name
-Phone
-Letters and spaces only; up to 29 characters
-Exactly one @ with text before it; only letters between @ and .com; must end with .com;
-unique across contacts (create and edit); up to 29 characters
-Exactly 10 digits; first digit 6, 7, 8 or 9; unique across contacts (create and edit)
-Email
-If an input is invalid, you are prompted to enter it again until it is valid.
-Data Storage Format
-Contacts are stored in Contacts.csv: first line is the contact count, then one name,phone,email line per
-contact.
+```
 
+**Step 2: Initialize the CSV file before the first run**
+
+If `Contacts.csv` does not exist, create it with a single line containing `0`:
+
+```bash
+echo 0 > Contacts.csv
+```
+
+**Step 3: Run the program**
+
+```bash
+./addressbook
+```
+
+**Important:** Run the program from the directory containing `Contacts.csv`, because the program uses a relative file path.
+
+## Usage
+
+The program displays a menu with the following options:
+
+| Option | Operation |
+|---|---|
+| 1 | Create Contact |
+| 2 | List Contacts |
+| 3 | Search Contact |
+| 4 | Edit Contact |
+| 5 | Delete Contact |
+| 6 | Exit |
+
+- **Create:** Enter the contact's name, phone number and email.
+- **List:** Displays all saved contacts.
+- **Search:** Search using a name, phone number or email.
+- **Edit:** Displays the contact list and allows editing using the serial number.
+- **Delete:** Displays the contact list and allows deleting using the serial number.
+- **Exit:** Saves all contact details to `Contacts.csv` before exiting.
+
+**Note:** Changes are saved to the CSV file only when option 6 (Exit) is selected. Closing the program forcefully or terminating it through another method may result in losing unsaved changes.
+
+## Input Validation Rules
+
+| Field | Validation |
+|---|---|
+| Name | Only letters and spaces; maximum 29 characters |
+| Phone Number | Exactly 10 digits; must start with 6, 7, 8 or 9 |
+| Email | Exactly one `@`, text before `@`, letters between `@` and `.com`, and must end with `.com` |
+| Duplicate Check | Phone numbers and email addresses must be unique |
+
+- Invalid inputs are rejected, and the user is prompted to enter them again.
+- Duplicate phone numbers and email addresses are not allowed during creation or editing.
+
+## Data Storage Format
+
+Contact details are stored in `Contacts.csv`.
+
+The first line contains the total number of contacts, followed by one contact per line in this format:
+
+```csv
+2
 Alice Smith,9876543210,alice@example.com
 Bob Johnson,8123456789,bob@company.com
-Limits
-• Maximum of 100 contacts
-• Name: letters and spaces, up to 29 characters
-• Phone: 10 digits starting with 6-9; unique
-• Email: one @, only letters between @ and .com, ends with .com, up to 29 characters; unique
-• Search is case-sensitive; data is saved only on 6. Exiting
-Possible Improvements
-• Handle a missing Contacts.csv and clear leftover input
-• Case-insensitive search and other email domains (.in, .org)
-Address Book (C) - README | Page 
+```
+
+## Limitations
+
+- Maximum of 100 contacts.
+- Maximum name length: 29 characters.
+- Maximum phone number length: 10 digits.
+- Maximum email length: 29 characters.
+- Search is case-sensitive.
+- Only `.com` email addresses are accepted.
+- A `Contacts.csv` file must be initialized before the first execution.
+- Changes are saved only when the user selects Exit.
+
+## Possible Improvements
+
+- Handle missing CSV files automatically.
+- Implement case-insensitive search.
+- Support additional email domains such as `.in` and `.org`.
+- Improve input buffer handling.
+- Add automatic saving after every modification.
+
+---
+
+**Developed as a C programming project to practice structures, functions, file handling, string manipulation, input validation and modular programming.**
