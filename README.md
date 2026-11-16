@@ -22,8 +22,8 @@ A menu-driven command-line Address Book application developed using **C programm
 |---|---|
 | `main.c` | Program entry point and main menu loop |
 | `addressbook.h` | Contact and AddressBook structures and function declarations |
-| `functions.c` | Core logic: validation, create, list, search, edit, delete and save operations |
-| `dummycontacts.c` | Contains `load_contact()` to load contacts from `Contacts.csv` at startup |
+| `function.c` | Core logic: validation, create, list, search, edit, delete and save operations |
+| `dummy_contacts.c` | Contains `load_contact()` to load contacts from `Contacts.csv` at startup |
 | `Contacts.csv` | Stores contact details and contact count |
 
 ## Build and Run
